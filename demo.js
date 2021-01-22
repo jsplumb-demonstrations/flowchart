@@ -1,6 +1,6 @@
-jsPlumb.ready(function () {
+jsPlumbBrowserUI.ready(function () {
 
-    var instance = window.jsp = jsPlumb.newInstance({
+    var instance = jsPlumbBrowserUI.newInstance({
         // default drag options
         dragOptions: { cursor: 'pointer', zIndex: 2000, grid:[20,20] },
         // the overlays to decorate each connection with.  note that the label overlay uses a function to generate the label text; in this
@@ -84,7 +84,7 @@ jsPlumb.ready(function () {
             ]
         },
         init = function (connection) {
-            connection.getOverlay("label").setLabel(connection.sourceId.substring(15) + "-" + connection.targetId.substring(15));
+            connection.getOverlay("label").setLabel(connection.source.id.substring(15) + "-" + connection.target.id.substring(15));
         };
 
     var _addEndpoints = function (toId, sourceAnchors, targetAnchors) {
@@ -126,24 +126,22 @@ jsPlumb.ready(function () {
         // listen for clicks on connections, and offer to delete connections on click.
         //
         instance.bind("click", function (conn, originalEvent) {
-           if (confirm("Delete connection from " + conn.sourceId + " to " + conn.targetId + "?")) {
+           if (confirm("Delete connection from " + conn.source.id + " to " + conn.target.id + "?")) {
                instance.deleteConnection(conn);
            }
         });
 
-        instance.bind("connectionDrag", function (connection) {
+        instance.bind("connection:drag", function (connection) {
             console.log("connection " + connection.id + " is being dragged. suspendedElement is ", connection.suspendedElement, " of type ", connection.suspendedElementType);
         });
 
-        instance.bind("connectionDragStop", function (connection) {
-            console.log("connection " + connection.id + " was dragged");
-        });
-
-        instance.bind("connectionMoved", function (params) {
+        instance.bind("connection:move", function (params) {
             console.log("connection " + params.connection.id + " was moved");
         });
-    });
 
-   // jsPlumb.fire("jsPlumbDemoLoaded", instance);
+        instance.bind("connection:abort", function (connection) {
+            console.log("connection aborted " + connection);
+        });
+    });
 
 });
