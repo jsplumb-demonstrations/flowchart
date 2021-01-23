@@ -3,6 +3,11 @@
     touch-action:none;
 }
 
+#canvas {
+    width:100vw;
+    height:100vh;
+}
+
 .flowchart-demo .window {
     border: 1px solid #346789;
     box-shadow: 2px 2px 19px #aaa;
