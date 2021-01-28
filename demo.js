@@ -25,7 +25,7 @@ jsPlumbBrowserUI.ready(function () {
                 }
             }]
         ],
-        container: "canvas"
+        container: canvas
     });
 
     // this is the paint style for the connecting lines..
