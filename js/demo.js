@@ -6,24 +6,32 @@ jsPlumbBrowserUI.ready(function () {
         // the overlays to decorate each connection with.  note that the label overlay uses a function to generate the label text; in this
         // case it returns the 'labelText' member that we set on each connection in the 'init' method below.
         connectionOverlays: [
-            [ "Arrow", {
-                location: 1,
-                visible:true,
-                width:11,
-                length:11,
-                id:"ARROW",
-                events:{
-                    click:function() { alert("you clicked on the arrow overlay")}
+            {
+                type:"Arrow",
+                options:{
+                    location: 1,
+                    visible:true,
+                    width:11,
+                    length:11,
+                    id:"ARROW",
+                    events:{
+                        click:function() { alert("you clicked on the arrow overlay")}
+                    }
                 }
-            } ],
-            [ "Label", {
-                location: 0.1,
-                id: "label",
-                cssClass: "aLabel",
-                events:{
-                    tap:function() { alert("hey"); }
+            },
+            {
+                type: "Label",
+                options: {
+                    location: 0.1,
+                    id: "label",
+                    cssClass: "aLabel",
+                    events: {
+                        tap: function () {
+                            alert("hey");
+                        }
+                    }
                 }
-            }]
+            }
         ],
         container: canvas
     });
@@ -57,18 +65,21 @@ jsPlumbBrowserUI.ready(function () {
                 strokeWidth: 1
             },
             isSource: true,
-            connector: [ "Flowchart", { stub: [40, 60], gap: 10, cornerRadius: 5, alwaysRespectStubs: true } ],
+            connector: { type:"Flowchart", options:{ stub: [40, 60], gap: 10, cornerRadius: 5, alwaysRespectStubs: true } },
             connectorStyle: connectorPaintStyle,
             hoverPaintStyle: endpointHoverStyle,
             connectorHoverStyle: connectorHoverStyle,
             dragOptions: {},
             overlays: [
-                [ "Label", {
-                    location: [0.5, 1.5],
-                    label: "Drag",
-                    cssClass: "endpointSourceLabel",
-                    visible:true
-                } ]
+                {
+                    type: "Label",
+                    options: {
+                        location: [0.5, 1.5],
+                        label: "Drag",
+                        cssClass: "endpointSourceLabel",
+                        visible: true
+                    }
+                }
             ]
         },
     // the definition of target endpoints (will appear when the user drags a connection)
@@ -80,7 +91,7 @@ jsPlumbBrowserUI.ready(function () {
             dropOptions: { hoverClass: "hover", activeClass: "active" },
             isTarget: true,
             overlays: [
-                [ "Label", { location: [0.5, -0.5], label: "Drop", cssClass: "endpointTargetLabel", visible:true } ]
+                { type:"Label", options:{ location: [0.5, -0.5], label: "Drop", cssClass: "endpointTargetLabel", visible:true } }
             ]
         },
         init = function (connection) {
@@ -103,10 +114,10 @@ jsPlumbBrowserUI.ready(function () {
     // suspend drawing and initialise.
     instance.batch(function () {
 
-        _addEndpoints("Window4", ["TopCenter", "BottomCenter"], ["LeftMiddle", "RightMiddle"]);
-        _addEndpoints("Window2", ["LeftMiddle", "BottomCenter"], ["TopCenter", "RightMiddle"]);
-        _addEndpoints("Window3", ["RightMiddle", "BottomCenter"], ["LeftMiddle", "TopCenter"]);
-        _addEndpoints("Window1", ["LeftMiddle", "RightMiddle"], ["TopCenter", "BottomCenter"]);
+        _addEndpoints("Window4", ["Top", "Bottom"], ["Left", "Right"]);
+        _addEndpoints("Window2", ["Left", "Bottom"], ["Top", "Right"]);
+        _addEndpoints("Window3", ["Right", "Bottom"], ["Left", "Top"]);
+        _addEndpoints("Window1", ["Left", "Right"], ["Top", "Bottom"]);
 
         // listen for new connections; initialise them the same way we initialise the connections at startup.
         instance.bind("connection", function (connInfo, originalEvent) {
@@ -114,12 +125,12 @@ jsPlumbBrowserUI.ready(function () {
         });
 
         // connect a few up
-        instance.connect({uuids: ["Window2BottomCenter", "Window3TopCenter"]});
-        instance.connect({uuids: ["Window2LeftMiddle", "Window4LeftMiddle"]});
-        instance.connect({uuids: ["Window4TopCenter", "Window4RightMiddle"]});
-        instance.connect({uuids: ["Window3RightMiddle", "Window2RightMiddle"]});
-        instance.connect({uuids: ["Window4BottomCenter", "Window1TopCenter"]});
-        instance.connect({uuids: ["Window3BottomCenter", "Window1BottomCenter"] });
+        instance.connect({uuids: ["Window2Bottom", "Window3Top"]});
+        instance.connect({uuids: ["Window2Left", "Window4Left"]});
+        instance.connect({uuids: ["Window4Top", "Window4Right"]});
+        instance.connect({uuids: ["Window3Right", "Window2Right"]});
+        instance.connect({uuids: ["Window4Bottom", "Window1Top"]});
+        instance.connect({uuids: ["Window3Bottom", "Window1Bottom"] });
         //
 
         //
