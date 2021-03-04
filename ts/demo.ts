@@ -7,7 +7,8 @@ import {
     ConnectionMovedParams, LabelOverlay,
     EVENT_CONNECTION_DETACHED,
     ConnectionDetachedParams,
-    AnchorLocations, EVENT_CLICK
+    AnchorLocations, EVENT_CLICK,
+    DotEndpoint
 } from "@jsplumb/core"
 
 ready(function () {
@@ -67,7 +68,7 @@ ready(function () {
         },
         // the definition of source endpoints (the small blue ones)
         sourceEndpoint = {
-            endpoint: "Dot",
+            endpoint: DotEndpoint.type,
             paintStyle: {
                 stroke: "#7AB02C",
                 fill: "transparent",
@@ -86,7 +87,7 @@ ready(function () {
         },
         // the definition of target endpoints (will appear when the user drags a connection)
         targetEndpoint = {
-            endpoint: "Dot",
+            endpoint: DotEndpoint.type,
             paintStyle: { fill: "#7AB02C", radius: 7 },
             hoverPaintStyle: endpointHoverStyle,
             maxConnections: -1,
@@ -116,7 +117,7 @@ ready(function () {
     // suspend drawing and initialise.
     instance.batch( () => {
 
-        _addEndpoints("Window4", [AnchorLocations.top, AnchorLocations.Bottom], [AnchorLocations.Left, AnchorLocations.Right]);
+        _addEndpoints("Window4", [AnchorLocations.Top, AnchorLocations.Bottom], [AnchorLocations.Left, AnchorLocations.Right]);
         _addEndpoints("Window2", [AnchorLocations.Left, AnchorLocations.Bottom], [AnchorLocations.Top, AnchorLocations.Right]);
         _addEndpoints("Window3", [AnchorLocations.Right, AnchorLocations.Bottom], [AnchorLocations.Left, AnchorLocations.Top]);
         _addEndpoints("Window1", [AnchorLocations.Left, AnchorLocations.Right], [AnchorLocations.Top, AnchorLocations.Bottom]);
