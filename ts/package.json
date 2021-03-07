@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/jsplumb-demonstrations/flowchart#readme",
   "dependencies": {
-    "@jsplumb/browser-ui": "^4.0.0-RC66"
+    "@jsplumb/browser-ui": "^4.0.0-RC72"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
