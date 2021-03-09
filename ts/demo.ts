@@ -15,7 +15,12 @@ ready(function () {
 
     const instance = newInstance({
         // default drag options
-        dragOptions: { cursor: 'pointer', zIndex: 2000, grid:[20,20] },
+        dragOptions: {
+            cursor: 'pointer',
+            zIndex: 2000,
+            grid:[20,20],
+            containment:"notNegative"
+        },
         // the overlays to decorate each connection with.  note that the label overlay uses a function to generate the label text; in this
         // case it returns the 'labelText' member that we set on each connection in the 'init' method below.
         connectionOverlays: [
