@@ -8,7 +8,8 @@ import {
     EVENT_CONNECTION_DETACHED,
     ConnectionDetachedParams,
     AnchorLocations, EVENT_CLICK,
-    DotEndpoint
+    DotEndpoint,
+    FlowchartConnector
 } from "@jsplumb/core"
 
 ready(function () {
@@ -80,12 +81,11 @@ ready(function () {
                 radius: 7,
                 strokeWidth: 1
             },
-            isSource: true,
-            connector: { type:"Flowchart", options:{ stub: [40, 60], gap: 10, cornerRadius: 5, alwaysRespectStubs: true }},
+            target:false,
+            connector: { type:FlowchartConnector.type, options:{ stub: [40, 60], gap: 10, cornerRadius: 5, alwaysRespectStubs: true }},
             connectorStyle: connectorPaintStyle,
             hoverPaintStyle: endpointHoverStyle,
             connectorHoverStyle: connectorHoverStyle,
-            dragOptions: {},
             overlays: [
                 { type:"Label", options:{ location: [0.5, 1.5], label: "Drag", cssClass: "endpointSourceLabel", visible:true } }
             ]
@@ -96,8 +96,7 @@ ready(function () {
             paintStyle: { fill: "#7AB02C", radius: 7 },
             hoverPaintStyle: endpointHoverStyle,
             maxConnections: -1,
-            dropOptions: { hoverClass: "hover", activeClass: "active" },
-            isTarget: true,
+            source:false,
             overlays: [
                 { type:"Label", options:{ location: [0.5, -0.5], label: "Drop", cssClass: "endpointTargetLabel", visible:true } }
             ]

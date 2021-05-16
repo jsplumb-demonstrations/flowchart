@@ -55,7 +55,7 @@ jsPlumbBrowserUI.ready(function () {
             fill: "#216477",
             stroke: "#216477"
         },
-    // the definition of source endpoints (the small blue ones)
+    // the definition of source endpoints (the hollow ones)
         sourceEndpoint = {
             endpoint: "Dot",
             paintStyle: {
@@ -64,12 +64,11 @@ jsPlumbBrowserUI.ready(function () {
                 radius: 7,
                 strokeWidth: 1
             },
-            isSource: true,
+            target:false,
             connector: { type:"Flowchart", options:{ stub: [40, 60], gap: 10, cornerRadius: 5, alwaysRespectStubs: true } },
             connectorStyle: connectorPaintStyle,
             hoverPaintStyle: endpointHoverStyle,
             connectorHoverStyle: connectorHoverStyle,
-            dragOptions: {},
             overlays: [
                 {
                     type: "Label",
@@ -89,7 +88,7 @@ jsPlumbBrowserUI.ready(function () {
             hoverPaintStyle: endpointHoverStyle,
             maxConnections: -1,
             dropOptions: { hoverClass: "hover", activeClass: "active" },
-            isTarget: true,
+            source:false,
             overlays: [
                 { type:"Label", options:{ location: [0.5, -0.5], label: "Drop", cssClass: "endpointTargetLabel", visible:true } }
             ]
